@@ -21,7 +21,23 @@ function addToCart(cart, product, quantity) {
 
   return [...cart, { ...product, quantity: newQuantity }];
 }
-function changeQuantity() { return notImplemented(); }
+
+function changeQuantity(cart, productId, newQuantity) {
+  const item = cart.find((product) => product.id === productId);
+  if (!item) {
+    return cart;
+  }
+
+  if (newQuantity <= 0) {
+    throw new RangeError('Количество должно быть больше 0');
+  }
+
+  if (newQuantity > item.stock) {
+    throw new RangeError('Количество превышает остаток на складе');
+  }
+
+  return cart.map((product) => (product.id === productId ? { ...product, quantity: newQuantity } : product));
+}
 function removeFromCart() { return notImplemented(); }
 function calculateCartSubtotal() { return notImplemented(); }
 function calculateOrderTotal() { return notImplemented(); }
