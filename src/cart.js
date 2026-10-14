@@ -38,7 +38,11 @@ function changeQuantity(cart, productId, newQuantity) {
 
   return cart.map((product) => (product.id === productId ? { ...product, quantity: newQuantity } : product));
 }
-function removeFromCart() { return notImplemented(); }
+
+function removeFromCart(cart, productId) {
+  return cart.filter((item) => item.id !== productId);
+}
+
 function calculateCartSubtotal() { return notImplemented(); }
 function calculateOrderTotal() { return notImplemented(); }
 
